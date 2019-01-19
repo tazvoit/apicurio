@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "swa",
+    "description": "Autorización de Venta",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/transacciones/ventas/autorizar": {
+      "description": "Autorización de Venta",
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "venta": {
+                  "value": "{\n  \"transaccion\": {\n    \"modoEntrada\": \"05\",\n    \"track2\": \"914927c2a88d50aa6b9ea65a3b05d\",\n    \"emv\": {\n      \"emvRequest\": \"82025C009F2701809F2608F\"\n   },   \n   \"venta\": {\n     \"importe\": 57.99,\n     \"fecha\": \"2019-01-08\",\n     \"hora\": \"11:01:263.006-06:00\",\n     \"moneda\": \"484\",\n     \"claveVenta\": \"937478\",\n     \"cvv2\": \"914927c2a88d50aa6b9ea65a3b05d\",\n     \"promocion\": {            \n       \"diferimiento\": \"00\",\n       \"numeroPagos\": \"12\",\n       \"tipoPlan\": \"00\"\n      }\n    },\n    \"comercio\": {\n      \"afiliacion\": \"9165713\"\n    }\n  }\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "response_venta": {
+                    "value": "{\n  \"transaccion\": {\n    \"claveOperacion\": 19244,\n    \"emv\": {\n     \"emvResponse\": \"8A023030910A18BD1BD9F96806A20010\"\n    },\n    \"comercio\": {\n      \"afiliacion\": \"9165713\"\n    },\n    \"venta\": {\n      \"importe\": 100.00,\n      \"moneda\": \"MXN\",\n      \"fecha\": \"2018-12-26\",\n      \"hora\": \"11:56:58.331-06:00\",     \n      \"producto\": \"CREDITO\",\n      \"bancoEmisor\": \"BANORTE, S.A.\",\n      \"marca\": \"MASTER CARD\",\n      \"autorizacion\": \"801585\",\n      \"claveVenta\": \"937478\",\n      \"leyendaQPS\": \"\"\n    }\n  }\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "error-400": {
+                    "value": "{\n  \"error\": {\n    \"tipo\": \"ERROR\",\n    \"mensaje\": \"Autorización de venta rechazada\"\n  },\n  \"masInformacion\": {\n    \"descripcionRechazo\": \"El mensaje es inválido. Verifique datos de entrada\"\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "http://microcks.apps.nuup.click/api",
+          "description": ""
+        }
+      ]
+    }
+  }
+}
