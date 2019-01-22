@@ -3,10 +3,36 @@
   "info": {
     "title": "swa",
     "description": "Autorización de Venta",
+    "license": {
+      "name": "GNU GPLv3",
+      "url": "https://www.gnu.org/licenses/gpl.txt"
+    },
     "version": "1.0.0"
   },
   "paths": {
-    "/api/v1/transacciones/ventas/autorizar": {
+    "/transacciones/echo": {
+      "description": "echo ",
+      "get": {
+        "responses": {
+          "200": {
+            "description": "echo test",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "echo": {
+                    "value": "{\"status\":\"success\",\"description\":\"call echo success.\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transacciones/ventas/autorizar": {
       "description": "Autorización de Venta",
       "post": {
         "requestBody": {
@@ -60,20 +86,38 @@
         }
       ]
     },
-    "/api/v1/transacciones/echo": {
-      "description": "echo ",
-      "get": {
+    "/transacciones/ventas/devolver": {
+      "summary": "Devolucion",
+      "description": "Devolucion de Venta",
+      "post": {
+        "summary": "devolucion",
+        "description": "devolucion",
         "responses": {
           "200": {
-            "description": "echo test",
+            "description": "devolucion",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string"
                 },
                 "examples": {
-                  "echo": {
-                    "value": "{\"status\":\"success\",\"description\":\"call echo success.\"}"
+                  "devolucion": {
+                    "value": "{\n  \"transaccion\": {\n    \"claveOperacion\": \"193839658\",\n    \"emv\": {\n      \"emvResponse\": \"911606010A03A6A0003F00000000000000008A01007108A1020304A480900072109A112233444455667788\"\n    },\n    \"comercio\": {\n      \"afiliacion\": \"900000000\"\n    },\n    \"venta\": {\n      \"importe\": \"755.80\",\n      \"moneda\": \"484\",\n      \"fecha\": \"2019-01-18\",\n      \"hora\": \"10:15:30+01:00\",\n      \"producto\": \"CREDITO\",\n      \"bancoEmisor\": \"BBVA Bancomer\",\n      \"marca\": \"VISA\",\n      \"autorizacion\": \"999999\",\n      \"claveVenta\": \"999999999\"\n    }\n  }\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "peticion incorrecta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "error-400-dev": {
+                    "value": "{\n  \"error\": {\n    \"tipo\": \"ERROR\",\n    \"mensaje\": \"Devolucion rechazada\"\n  },\n  \"masInformacion\": {\n    \"codigoRechazo\": 0,\n    \"descripcionRechazo\": \"Mensaje Invalido\",\n    \"claveOperacion\": \"8421\",\n    \"claveVenta\": \"999999999\"\n  }\n}"
                   }
                 }
               }
