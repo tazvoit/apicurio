@@ -22,6 +22,7 @@
         },
         "responses": {
           "200": {
+            "description": "Autorizacion de Ventas",
             "content": {
               "application/json": {
                 "schema": {
@@ -36,6 +37,7 @@
             }
           },
           "400": {
+            "description": "Peticion Incorrecta",
             "content": {
               "application/json": {
                 "schema": {
@@ -57,6 +59,28 @@
           "description": ""
         }
       ]
+    },
+    "/api/v1/transacciones/echo": {
+      "description": "echo ",
+      "get": {
+        "responses": {
+          "200": {
+            "description": "echo test",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "echo": {
+                    "value": "{\"status\":\"success\",\"description\":\"call echo success.\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
